@@ -1,2 +1,2 @@
 # PlanItShare
-Share your plannings to others to know.
+Plan and share your plannings to others to know.
