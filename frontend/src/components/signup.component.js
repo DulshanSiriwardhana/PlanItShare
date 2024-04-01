@@ -1,7 +1,34 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
+import axios from 'axios';
 
-export default class SignUp extends Component {
-  render() {
+const SignUp = () => {
+    const [FirstName, setFirstName] = useState(null);
+    const [LastName, setLastName] = useState(null);
+    const [Email, setEmail] = useState(null);
+    const [Password, setPassword] = useState(null);
+
+    const handleSignUp = async () => {
+      try{
+        alert(`${FirstName} ${LastName} ${Email} ${Password}`);
+        if(FirstName && LastName && Email &&  Password){
+
+          const loggedUser = await axios.post('http://localhost:8050/user/add', {
+            firstname : FirstName,
+            lastname : LastName,
+            email : Email,
+            password : Password
+          });
+          console.log(loggedUser.data)
+          alert(`${FirstName} ${LastName} is registred sucessfully`);
+          setFirstName(null);
+          setLastName(null);
+          setEmail(null);
+          setPassword(null);
+        }
+      } catch{
+        alert('Error SignUp');
+      }
+    }
     return (
       <form>
         <h3>Sign Up</h3>
@@ -9,18 +36,28 @@ export default class SignUp extends Component {
           <label>First Name</label>
           <input
             type="text"
+            value={FirstName}
+            onChange={(e)=>setFirstName(e.target.value)}
             className="form-control"
             placeholder="Enter First Name"
           />
         </div>
         <div className="mb-3">
           <label>Last Name</label>
-          <input type="text" className="form-control" placeholder="Enter Last Name" />
+          <input 
+            type="text" 
+            value={LastName}
+            onChange={(e)=>setLastName(e.target.value)}
+            className="form-control"
+            placeholder="Enter Last Name" 
+           />
         </div>
         <div className="mb-3">
           <label>Email Address</label>
           <input
             type="email"
+            value={Email}
+            onChange={(e)=>setEmail(e.target.value)}
             className="form-control"
             placeholder="Enter Email"
           />
@@ -29,12 +66,14 @@ export default class SignUp extends Component {
           <label>Password</label>
           <input
             type="password"
+            value={Password}
+            onChange={(e)=>setPassword(e.target.value)}
             className="form-control"
             placeholder="Enter Password"
           />
         </div>
         <div className="d-grid">
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary" onClick={handleSignUp}>
             Sign Up
           </button>
         </div>
@@ -43,5 +82,6 @@ export default class SignUp extends Component {
         </p>
       </form>
     )
-  }
 }
+
+export default SignUp;

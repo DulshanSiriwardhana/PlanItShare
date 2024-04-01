@@ -13,16 +13,18 @@ router.get('/',async(req,res)=>{
     }
 });
 router.post('/add',(req,res)=>{
-    const name = req.body.name;
+    const firstname = req.body.firstname;
+    const lastname = req.body.lastname;
     const password = req.body.password;
-    const regnum = req.body.regnum;
+    const email = req.body.email;
 
     const newUser = new User({
-        name,
+        firstname,
+        lastname,
         password,
-        regnum
+        email
     })
-    newPlan.save().then(()=>{
+    newUser.save().then(()=>{
         res.status(200).json(newUser);
     }).catch((err)=>{
         res.status(500).json(err);
@@ -31,7 +33,7 @@ router.post('/add',(req,res)=>{
 router.get('/:userId',async(req,res)=>{
     try {
         const userId = req.params.userId;
-        const user = await Plan.findById(userId);
+        const user = await User.findById(userId);
         res.status(200).finaljson(user);
     }
     catch (error) {
