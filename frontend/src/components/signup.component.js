@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import axios from 'axios';
+import axios from 'axios';import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
-    const [FirstName, setFirstName] = useState(null);
-    const [LastName, setLastName] = useState(null);
-    const [Email, setEmail] = useState(null);
-    const [Password, setPassword] = useState(null);
+    const navigate = useNavigate();
+    const [FirstName, setFirstName] = useState('');
+    const [LastName, setLastName] = useState('');
+    const [Email, setEmail] = useState('');
+    const [Password, setPassword] = useState('');
 
     const handleSignUp = async () => {
       try{
@@ -20,15 +21,16 @@ const SignUp = () => {
           });
           console.log(loggedUser.data)
           alert(`${FirstName} ${LastName} is registred sucessfully`);
-          setFirstName(null);
-          setLastName(null);
-          setEmail(null);
-          setPassword(null);
+          setFirstName('');
+          setLastName('');
+          setEmail('');
+          setPassword('');
+          navigate('/sign-in');
         }
       } catch{
         alert('Error SignUp');
       }
-    }
+    };
     return (
       <form>
         <h3>Sign Up</h3>

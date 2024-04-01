@@ -1,7 +1,32 @@
-import React, { Component } from 'react'
+import axios from 'axios';
+import React, { Component, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
-export default class Login extends Component {
-  render() {
+const Login = ()=> {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+    
+    const handleLogin = async()=>{
+      try{
+        alert(`${email} ${password}`);
+        const response = await axios.post('http://localhost:8050/user/login',{
+          email,
+          password
+        });
+        console.log(response);
+        if(response.data.status === 'success') {
+          alert('Login successfull');
+          navigate('/home');
+          window.location.reload();
+        } else{
+          alert('Incorrect email or password');
+        }
+      } catch{
+        alert('Error during login');
+      }
+    };
+
     return (
       <form>
         <h3>Sign In</h3>
@@ -9,6 +34,8 @@ export default class Login extends Component {
           <label>Email Address</label>
           <input
             type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="form-control"
             placeholder="Enter Email"
           />
@@ -17,6 +44,8 @@ export default class Login extends Component {
           <label>Password</label>
           <input
             type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="form-control"
             placeholder="Enter Password"
           />
@@ -34,7 +63,7 @@ export default class Login extends Component {
           </div>
         </div>
         <div className="d-grid">
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary" onClick={handleLogin}>
             Submit
           </button>
         </div>
@@ -43,5 +72,6 @@ export default class Login extends Component {
         </p>
       </form>
     )
-  }
 }
+
+export default Login;
