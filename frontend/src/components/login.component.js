@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { Component, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { setCatch } from '../catching-mechanism/catch';
 
 const Login = ()=> {
     const [email, setEmail] = useState('');
@@ -17,8 +18,8 @@ const Login = ()=> {
         console.log(response);
         if(response.data.status === 'success') {
           alert('Login successfull');
+          setCatch('loggedUser', JSON.stringify(response));
           navigate('/home');
-          window.location.reload();
         } else{
           alert('Incorrect email or password');
         }
@@ -63,7 +64,7 @@ const Login = ()=> {
           </div>
         </div>
         <div className="d-grid">
-          <button type="submit" className="btn btn-primary" onClick={handleLogin}>
+          <button type="button" className="btn btn-primary" onClick={handleLogin}>
             Submit
           </button>
         </div>
