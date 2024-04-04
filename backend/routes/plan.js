@@ -14,9 +14,15 @@ router.get('/',async(req,res)=>{
 });
 router.post('/add',(req,res)=>{
     const name = req.body.name;
+    const key = req.body.key;
+    const userId = req.body.userId;
+    const text = req.body.text;
 
     const newPlan = new Plan({
-        name
+        name,
+        key,
+        userId,
+        text
     })
     newPlan.save().then(()=>{
         res.status(200).json(newPlan);
