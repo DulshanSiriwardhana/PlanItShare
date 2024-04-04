@@ -12,6 +12,16 @@ router.get('/',async(req,res)=>{
         res.status(500).json({message: error.message});
     }
 });
+router.get('/:userId',async(req,res)=>{
+    try {
+        const userId = req.params.userId;
+        const plan = await Plan.find(userId);
+        res.status(200).finaljson(plan);
+    }
+    catch (error) {
+        res.status(500).json({message: error.message});
+    }
+});
 router.post('/add',(req,res)=>{
     const name = req.body.name;
     const key = req.body.key;

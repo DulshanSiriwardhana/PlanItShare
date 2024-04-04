@@ -13,7 +13,7 @@ const Home = () => {
   const fetchMyPlans =async()=>{
     var plans;
     try{
-      plans = await axios.get('http://localhost:8050/plan/');
+      plans = await axios.get(`http://localhost:8050/plan/${JSON.parse(loggedUser).data.user._id}`);
       if(plans)
       {
         setMyPlans(plans.data);
