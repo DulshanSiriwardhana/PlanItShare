@@ -1,11 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import { getCatch } from '../catching-mechanism/catch';
+import axios from 'axios';
 
 const Home = () => {
   const [loggedUser, setLoggedUser] = useState(null);
+  const [myPlans, setMyPlans] = useState(null);
+
+  const fetchMyPlans =async()=>{
+    var plans;
+    try{
+      plans = await axios.get('http://localhost:8050/plan/');
+      if(plans)
+      {
+        setMyPlans(plans.data);
+      }
+    } catch{
+      console.log('error');
+    }
+  };
 
   useEffect(()=>{
     setLoggedUser(getCatch('loggedUser'));
+    fetchMyPlans();
+    console.log(myPlans);
   },[]);
 
   return (
@@ -19,11 +36,10 @@ const Home = () => {
       />
 
       <div className="list-group">
-        <button type="button" className="list-group-item list-group-item-action">Plan ID - Plan Name</button>
-        <button type="button" className="list-group-item list-group-item-action">Plan ID - Plan Name</button>
-        <button type="button" className="list-group-item list-group-item-action">Plan ID - Plan Name</button>
-        <button type="button" className="list-group-item list-group-item-action">Plan ID - Plan Name</button>
-        <button type="button" className="list-group-item list-group-item-action">Plan ID - Plan Name</button>
+        {(myPlans)?(myPlans.map((plan)=>(
+            <button type="button" className="list-group-item list-group-item-action">Plan ID - {plan._id}</button>
+          ))):<p>No plans to show</p>
+        }
       </div>
     </form>
   )

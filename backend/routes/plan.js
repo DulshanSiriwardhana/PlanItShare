@@ -6,7 +6,7 @@ const Plan = require("../models/plan");
 router.get('/',async(req,res)=>{
     try {
         const plans = await Plan.find();
-        res.status(200).finaljson(planss);
+        res.status(200).json(plans);
     }
     catch (error) {
         res.status(500).json({message: error.message});

@@ -28,7 +28,7 @@ const UserRouter = require("./routes/user.js");
 app.use("/user",UserRouter);
 
 const PlanRouter = require("./routes/plan.js");
-app.use("/plan",UserRouter);
+app.use("/plan",PlanRouter);
 
 app.listen(PORT,()=>{
     console.log(`Server is up and running on port number: ${PORT}`);
