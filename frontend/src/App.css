@@ -1,0 +1,46 @@
+body {
+    background: #f3c538;
+  }
+  
+  .key-pwd > a {
+    color: #dc3545;
+    font-weight: 500;
+  }
+  
+  .key-password .panel-default {
+    padding: 31%;
+    margin-top: -27%;
+  }
+  
+  .key-password .panel-body {
+    padding: 15%;
+    margin-bottom: -50%;
+    background: #fff;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  
+  img {
+    width: 40%;
+    margin-bottom: 10%;
+  }
+  
+  .btnKey {
+    background: #c0392b;
+    border: none;
+  }
+  
+  .key-password .dropdown {
+    width: 100%;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+  }
+  
+  .key-password .dropdown button {
+    width: 100%;
+  }
+  
+  .key-password .dropdown ul {
+    width: 100%;
+  }
+  
