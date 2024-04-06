@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Login from './components/login.component'
 import SignUp from './components/signup.component'
 import Home from './components/home.component'
-import Navbar from './components/navbar'
+import Navbar from './components/navbar.component'
 
 function App() {
   return (

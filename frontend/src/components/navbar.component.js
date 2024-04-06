@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {Link, useNavigate } from 'react-router-dom'
 import { getCatch, removeCatch } from '../catching-mechanism/catch';
 
-function Navbar() {
+const Navbar = () => {
     const [loggedUser, setLoggedUser] = useState(null);
     const navigate = useNavigate();
 
