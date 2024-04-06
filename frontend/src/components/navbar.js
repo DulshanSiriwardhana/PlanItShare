@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {Link, useNavigate } from 'react-router-dom'
-import { getCatch, setCatch } from '../catching-mechanism/catch';
+import { getCatch, removeCatch } from '../catching-mechanism/catch';
 
 function Navbar() {
     const [loggedUser, setLoggedUser] = useState(null);
@@ -8,42 +8,44 @@ function Navbar() {
 
     useEffect(()=>{
         setLoggedUser(getCatch('loggedUser'));
-    },[])
+    },[loggedUser])
 
     const handleLogout =()=>{
-        setCatch('loggedUser',null);
+        removeCatch('loggedUser');
+        setLoggedUser(null);
         navigate('/');
+        window.location.reload();
     }
-    alert(loggedUser);
-    if(!loggedUser || loggedUser==='')
+    
+    if(!loggedUser)
     {
         return (
             <div>
                 <nav className="navbar navbar-expand-lg navbar-light fixed-top">
-                <div className="container">
-                    <Link className="navbar-brand" to={'/sign-in'}>
-                    PlanItShare
-                    </Link>
-                    <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-                    <ul className="navbar-nav ml-auto">
-                        <li className="nav-item">
-                        <Link className="nav-link" to={'/sign-in'}>
-                            Login
+                    <div className="container">
+                        <Link className="navbar-brand" to={'/sign-in'}>
+                        PlanItShare
                         </Link>
-                        </li>
-                        <li className="nav-item">
-                        <Link className="nav-link" to={'/sign-up'}>
-                            Sign Up
-                        </Link>
-                        </li>
-                    </ul>
+                        <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+                            <ul className="navbar-nav ml-auto">
+                                <li className="nav-item">
+                                <Link className="nav-link" to={'/sign-in'}>
+                                    Login
+                                </Link>
+                                </li>
+                                <li className="nav-item">
+                                <Link className="nav-link" to={'/sign-up'}>
+                                    Sign Up
+                                </Link>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
                 </nav>
             </div>
         )
     }
-    if(loggedUser!==null || loggedUser!=='')
+    if(loggedUser)
     {
         return (
             <div>
@@ -74,8 +76,6 @@ function Navbar() {
             </div>
         )  
     }
-
-
 }
 
 export default Navbar

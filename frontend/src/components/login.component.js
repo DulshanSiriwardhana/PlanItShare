@@ -20,6 +20,7 @@ const Login = ()=> {
           alert('Login successfull');
           setCatch('loggedUser', JSON.stringify(response));
           navigate('/home');
+          window.location.reload();
         } else{
           alert('Incorrect email or password');
         }
